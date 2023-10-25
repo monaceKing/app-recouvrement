@@ -24,13 +24,6 @@ $('#myTable').on('search.dt', function () {
 });
 
 
-
-
-
-
-
-
-
 // $(document).ready(function () {
 //   const table = $('#myTable').DataTable();
   
@@ -44,8 +37,6 @@ $('#myTable').on('search.dt', function () {
 //       table.column(6).search('.+', true, false).draw();
 //   });
 // });
-
-
 
 
 
@@ -73,9 +64,6 @@ $('#myTable').on('search.dt', function () {
   // Mettez à jour la balise <p> avec le résultat du calcul du crédit
   $('#totalCredit').text("  Total des crédits : " + formattedTotalCreditWithSearch);
 });
-
-
-
 
 
 

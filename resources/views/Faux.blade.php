@@ -52,6 +52,7 @@
                     <th class="hidden"></th>
                     <th>Crédit</th>
                     <th class="hidden"></th>
+                    <th>Delais</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -115,7 +116,24 @@
                            }
                         @endphp
                     </td>
-                                      
+                    <td>
+                        @php
+                            $date1 = new DateTime($donnee->EC_Echeance); //date d'echéance
+
+                            $date2 = new DateTime(); //Date d'aujourd'hui
+
+                            $intervalle = $date2->diff($date1);
+
+                            $nj = $intervalle->format('%a');
+
+                            
+                            if ($date1 > $date2) {
+                                echo (-$nj);
+                            }else{
+                                echo ($nj);
+                            }
+                        @endphp
+                    </td>              
                     <td>
                         <a href="/details/{{$donnee->CT_Num}}" class="btn btn-primary" target="_blank">Détails</a>
                     </td>

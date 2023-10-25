@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,7 +22,7 @@
             <button id="btnFiltrerVide" class="btn btn-primary m-2">Solde non Lettré</button>
         </li>
         <li class="nav-item">
-            <button id="btnEffacerFiltre" class="btn btn-warning m-2"">Effacer le filtre</button>
+            <button id="btnEffacerFiltre" class="btn btn-warning m-2">Effacer le filtre</button>
         </li>
       </ul>
 </div>
@@ -34,6 +34,7 @@
        {{-- totalCredit --}}
         <span id="totalCredit" class="fw-bolder text-success" style="display: inline-block;"></span>
         </div>
+        
         <!-- Ajoutez deux boutons pour le filtrage -->
         <table class="table table-dark table-hover py-5 mx-auto" id="myTable">
             <thead class="table-light">
@@ -52,6 +53,7 @@
                     <th class="hidden">King</th>
                     <th>Crédit</th>
                     <th>EC_Lettrage</th>
+                    <th>Delais</th>
                 </tr>
             </thead>
     
@@ -126,7 +128,25 @@
                            }
                         @endphp
                     </td>
-                    <td>{{$donnee->EC_Lettrage}}</td> 
+                    <td>{{$donnee->EC_Lettrage}}</td>
+                    <td>
+                        @php
+                            $date1 = new DateTime($donnee->EC_Echeance); //date d'echéance
+
+                            $date2 = new DateTime(); //Date d'aujourd'hui
+
+                            $intervalle = $date2->diff($date1);
+
+                            $nj = $intervalle->format('%a');
+
+                            
+                            if ($date1 > $date2) {
+                                echo (-$nj);
+                            }else{
+                                echo ($nj);
+                            }
+                        @endphp
+                    </td> 
                 </tr>
                     @php
                     $ide +=1;

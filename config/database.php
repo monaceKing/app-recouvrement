@@ -39,7 +39,7 @@ return [
             'driver' => 'sqlsrv',
             'host' => '127.0.0.1',
             'port' => 1433,
-            'database' => 'TEST',
+            'database' => 'GBAEAUBAB23',
             'username' => 'sa',
             'password' => 'IGF2023',
         ],

@@ -27,4 +27,4 @@ Route::get('/details/{CT_Num}', [MonController::class, 'details']);
 
 Route::get('/time', [FauxController::class, 'time']);
 
-
+Route::get('/fusion', [MonController::class,'fusion']);
