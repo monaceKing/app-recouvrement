@@ -24,10 +24,20 @@ class MonController extends Controller
 
 
     public function faux(Request $request){
-        $data = MonModel::select('CT_Num', 'EC_Intitule', 'EC_Sens', 'EC_Montant','EC_Echeance')
-        ->whereNotNull('CT_Num')
+        // $data = MonModel::select('CT_Num', 'EC_Intitule', 'EC_Sens', 'EC_Montant','EC_Echeance')
+        // ->whereNotNull('CT_Num')
+        // ->whereYear('EC_Echeance','2023')
+        // ->get();
+        // return view('faux',compact('data'));
+
+        $data = ModelCompteT ::join('F_ECRITUREC', 'F_COMPTET.CT_Num', '=', 'F_ECRITUREC.CT_Num')
+        ->join('F_COLLABORATEUR', 'F_COMPTET.CO_No', '=', 'F_COLLABORATEUR.CO_No')
+        ->select('F_COMPTET.CO_No','F_COLLABORATEUR.CO_Nom', 'F_ECRITUREC.CT_Num', 'F_ECRITUREC.EC_Intitule', 'F_ECRITUREC.EC_sens', 'F_ECRITUREC.Ec_Montant', 'F_ECRITUREC.EC_Echeance')
+        ->where('F_ECRITUREC.CT_Num', 'like', 'CL%')
+        ->orderBy('F_ECRITUREC.CT_Num')
         ->whereYear('EC_Echeance','2023')
         ->get();
+
         return view('faux',compact('data'));
     }
 

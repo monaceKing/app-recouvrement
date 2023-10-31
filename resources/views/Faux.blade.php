@@ -20,7 +20,7 @@
 </div>
 
 <div class="container">
-    <ul class="nav justify-content-center p-4 fs-5" style="background-color: #f6f7f7">
+    <ul class="nav justify-content-center p-2 fs-5" style="background-color: #f6f7f7">
         <li class="nav-item">
           {{-- totalDebit --}}
           <span id="totalDebit1" class="fw-bolder text-primary nav-link" style="display: inline-block;"></span>
@@ -32,7 +32,7 @@
       </ul>
 </div>
 <div class="container text-center">
-    <div class="py-5">
+    <div class="py-2">
       <p id="balanceStatus" class="fw-bolder fs-5"></p>
     </div>
   </div>
@@ -45,7 +45,8 @@
             <thead class="table-light">
                 <p id="totalDebit" class="justify-content-center fw-bolder"></p>
                 <tr>
-                    <th>#</th>
+                    <th>CO_No</th>
+                    <th>CO_Nom</th>
                     <th>CT_Num</th>
                     <th>EC_Intitule</th>
                     <th>Débit</th>
@@ -53,68 +54,68 @@
                     <th>Crédit</th>
                     <th class="hidden"></th>
                     <th>Delais</th>
+                    {{-- <th>EC_sens</th>
+                    <th>Ec_Montant</th> --}}
                     <th>Action</th>
                 </tr>
             </thead>
     
             <tbody>
                 
-                @php
-                    $ide = 1;
-                @endphp
                 @foreach ($data as $donnee)
                 
                 @php
-                    $amount = $donnee->EC_Montant;
-                    $format = number_format($amount,0, '.', '.');
+                    $amount = $donnee->Ec_Montant;
+                    $format = number_format($amount,0, ' ', ' ');
                 @endphp
 
                 <tr>
-                    <td>{{$ide}}</td>
+                    <td>{{ $donnee->CO_Nom }}</td>
+                    <td>{{ $donnee->CO_No }}</td>
                     <td>{{$donnee->CT_Num}}</td>
                     <td>{{$donnee->EC_Intitule}}</td>
                     <td>
                         {{-- Débit --}}
                         @php
-                           if ($donnee->EC_Sens <= 0) {
+                        if ($donnee->EC_sens <= 0) {
                                 echo $format;
                            } else {
                             echo 0;
                            }
-                        @endphp
+                    @endphp
                     </td>
 
                     <td class="hidden">
                         {{-- Calcul débit --}}
                         @php
-                           if ($donnee->EC_Sens <= 0) {
-                                echo $donnee->EC_Montant;
+                        if ($donnee->EC_sens <= 0) {
+                                echo $donnee->Ec_Montant;
                            } else {
                             echo 0;
                            }
-                        @endphp
+                    @endphp
 
                     </td>
 
                     <td>
                         {{-- Crédit --}}
                         @php
-                           if ($donnee->EC_Sens > 0) {
-                                echo $format;
-                           } else {
-                            echo 0;
-                           }
-                        @endphp
+                        if ($donnee->EC_sens > 0) {
+                            echo $format;
+                       } else {
+                        echo 0;
+                       }
+                    @endphp
                     </td>
                     <td class="hidden">
                         {{-- calcul Crédit --}}
                         @php
-                           if ($donnee->EC_Sens > 0) {
-                                echo $donnee->EC_Montant;
-                           } else {
-                            echo 0;
-                           }
-                        @endphp
+                        if ($donnee->EC_sens > 0) {
+                            echo $donnee->Ec_Montant;
+                       } else {
+                        echo 0;
+                       }
+                    @endphp
                     </td>
                     <td>
                         @php
@@ -133,14 +134,13 @@
                                 echo ($nj);
                             }
                         @endphp
-                    </td>              
+                    </td>
+                    {{-- <td>{{$donnee->EC_sens}}</td> 
+                    <td>{{number_format($donnee->Ec_Montant,0, ' ', ' ')}}</td>              --}}
                     <td>
                         <a href="/details/{{$donnee->CT_Num}}" class="btn btn-primary" target="_blank">Détails</a>
                     </td>
                 </tr>
-                    @php
-                    $ide +=1;
-                    @endphp
                     @endforeach
         </tbody>
         </table>

@@ -53,7 +53,7 @@
                     @endphp
                 </td>
                 <td>{{ $row->Ec_Montant }}</td>
-                <td>{{ $row->EC_Echeance }}</td>
+                <td>{{(new DateTime($row->EC_Echeance))->format('d/m/Y')}}</td>
                 <td>
                     @php
                         $date1 = new DateTime($row->EC_Echeance); //date d'echéance
